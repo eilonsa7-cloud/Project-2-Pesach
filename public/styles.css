@@ -1,0 +1,268 @@
+/* ============================================================
+   Pesach Barcode Scanner – Mobile-first Hebrew RTL styles
+   Color palette:
+     Navy  #1a4a8a   Gold   #c8a415
+     Green #2d7a2d   Red    #c0392b
+     Cream #f5f0e8   White  #ffffff
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f5f0e8;
+  color: #2c2c2c;
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ──────────────────────────────── */
+.app-header {
+  background: linear-gradient(135deg, #1a4a8a 0%, #0d2d5a 100%);
+  color: #fff;
+  padding: 20px 16px 18px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.header-sub {
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+/* ── MAIN / LAYOUT ───────────────────────── */
+.app-main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px 12px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── CARDS ───────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a4a8a;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #c8a415;
+  padding-bottom: 6px;
+  display: inline-block;
+}
+
+/* ── SCANNER ─────────────────────────────── */
+.scanner-card {
+  border-top: 4px solid #c8a415;
+}
+
+.scanner-reader {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #111;
+  min-height: 220px;
+}
+
+/* html5-qrcode renders inside #reader; clean up its default UI */
+#reader video {
+  width: 100% !important;
+  border-radius: 8px;
+}
+
+#reader img[alt="Info icon"] { display: none; }
+
+#reader__scan_region {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Override the lib's default border color for the scan frame */
+#reader__scan_region > img,
+#reader__scan_region > div {
+  border-color: #c8a415 !important;
+}
+
+.scanner-hint {
+  font-size: 0.82rem;
+  color: #666;
+  text-align: center;
+  margin: 10px 0 12px;
+}
+
+.scanner-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* ── MANUAL INPUT ────────────────────────── */
+.manual-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.manual-field {
+  flex: 1;
+  border: 2px solid #c8a415;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1.05rem;
+  text-align: left;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.manual-field:focus {
+  border-color: #1a4a8a;
+}
+
+/* ── BUTTONS ─────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.1s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.92);
+}
+
+.btn-primary {
+  background: #1a4a8a;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #eaeaea;
+  color: #333;
+}
+
+.btn-website {
+  background: linear-gradient(135deg, #c8a415, #a88310);
+  color: #fff;
+  width: 100%;
+  font-size: 1rem;
+  padding: 13px 18px;
+  border-radius: 10px;
+}
+
+/* ── LOADING ─────────────────────────────── */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  color: #1a4a8a;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid #d0d8e8;
+  border-top-color: #1a4a8a;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── RESULTS ─────────────────────────────── */
+.barcode-badge {
+  background: #1a4a8a;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.barcode-badge strong {
+  font-size: 1.15rem;
+  display: block;
+  margin-top: 2px;
+  direction: ltr;
+  letter-spacing: 1px;
+}
+
+.results-iframe-wrap {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+}
+
+.results-title {
+  padding: 12px 16px 0;
+}
+
+.results-iframe {
+  width: 100%;
+  height: 65vh;
+  border: none;
+  display: block;
+}
+
+.website-btn-wrap {
+  margin-top: 4px;
+}
+
+.error-msg {
+  background: #fdecea;
+  border: 1px solid #f5c6c6;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #c0392b;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.scan-again {
+  width: 100%;
+  margin-top: 4px;
+  padding: 12px;
+}
+
+/* ── UTILITY ─────────────────────────────── */
+.hidden {
+  display: none !important;
+}

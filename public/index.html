@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#1a4a8a" />
+  <title>סורק כשרות לפסח</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div class="header-inner">
+      <h1 class="header-title">סורק כשרות לפסח</h1>
+      <p class="header-sub">סרוק ברקוד לבדיקה באתר kosharot.co.il</p>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- ===== SCANNER CARD ===== -->
+    <section class="card scanner-card">
+      <div class="card-title">📷 סריקת ברקוד</div>
+
+      <!-- html5-qrcode mounts the video here -->
+      <div id="reader" class="scanner-reader"></div>
+
+      <p class="scanner-hint">כוון את המצלמה אל הברקוד עד לזיהוי אוטומטי</p>
+
+      <div class="scanner-controls">
+        <button id="btn-start" class="btn btn-primary" onclick="startScanner()">▶ התחל סריקה</button>
+        <button id="btn-stop" class="btn btn-secondary hidden" onclick="stopScanner()">⏹ עצור</button>
+      </div>
+    </section>
+
+    <!-- ===== MANUAL INPUT ===== -->
+    <section class="card manual-card">
+      <div class="card-title">⌨️ הזנה ידנית</div>
+      <div class="manual-row">
+        <input
+          id="manual-input"
+          type="text"
+          inputmode="numeric"
+          dir="ltr"
+          placeholder="הזן מספר ברקוד..."
+          class="manual-field"
+          onkeydown="if(event.key==='Enter') triggerSearch(this.value)"
+        />
+        <button class="btn btn-primary" onclick="triggerSearch(document.getElementById('manual-input').value)">חפש</button>
+      </div>
+    </section>
+
+    <!-- ===== LOADING ===== -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>מחפש מוצר...</p>
+    </div>
+
+    <!-- ===== RESULTS ===== -->
+    <section id="results-section" class="hidden">
+
+      <!-- Detected barcode badge -->
+      <div id="barcode-badge" class="barcode-badge"></div>
+
+      <!-- Website results in iframe (srcdoc = no CORS/X-Frame-Options issues) -->
+      <div id="results-iframe-wrap" class="results-iframe-wrap hidden">
+        <div class="card-title results-title">תוצאות מאתר kosharot.co.il</div>
+        <iframe
+          id="results-iframe"
+          class="results-iframe"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          title="תוצאות חיפוש"
+        ></iframe>
+      </div>
+
+      <!-- Fallback / open on website button -->
+      <div class="website-btn-wrap">
+        <a id="website-link" href="#" target="_blank" class="btn btn-website">
+          🌐 פתח באתר kosharot.co.il
+        </a>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-msg" class="error-msg hidden"></div>
+
+      <!-- Scan another button -->
+      <button class="btn btn-secondary scan-again" onclick="resetToScanner()">↩ סרוק מוצר נוסף</button>
+
+    </section>
+
+  </main>
+
+  <!-- html5-qrcode from CDN -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
